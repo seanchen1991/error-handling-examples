@@ -1,7 +1,8 @@
 # Error Handling Examples
 
 A collection of small projects, most of them drawn from pre-existing Rust tutorials, 
-that demonstrate Rust error handling best-practices.
+that demonstrate Rust error handling best-practices. This repo is a companion to the
+Book of Error.
 
 ## Projects
 
@@ -10,4 +11,3 @@ that demonstrate Rust error handling best-practices.
 
 [minigrep]: https://doc.rust-lang.org/book/ch12-00-an-io-project.html
 [web-server]: https://doc.rust-lang.org/book/ch12-00-an-io-project.html
-
