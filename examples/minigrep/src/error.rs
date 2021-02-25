@@ -14,7 +14,7 @@ impl fmt::Display for AppError {
         match self {
             Self::MissingPattern => f.write_str("No pattern provided"),
             Self::MissingFilename => f.write_str("No filename provided"),
-            Self::ConfigLoad { source: _ } => f.write_str("Could not load config"),
+            Self::ConfigLoad { source } => write!(f, "Could not load config: {}", source),
         }
     }
 }
