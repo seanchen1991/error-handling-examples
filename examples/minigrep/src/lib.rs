@@ -1,6 +1,9 @@
+mod error;
+
 use std::env;
 use std::fs;
-use std::error::Error;
+
+use error::AppError;
 
 pub struct Config {
     query: String,
@@ -9,17 +12,17 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
+    pub fn new(mut args: env::Args) -> Result<Config, AppError> {
         args.next();
 
         let query = match args.next() {
             Some(arg) => arg,
-            None => return Err("Didn't get a query string"),
+            None => return Err(AppError::MissingQuery),
         };
 
         let filename = match args.next() {
             Some(arg) => arg,
-            None => return Err("Didn't get a file name"),
+            None => return Err(AppError::MissingFilename),
         };
 
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
@@ -32,7 +35,7 @@ impl Config {
     }
 }
 
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+pub fn run(config: Config) -> Result<(), AppError> {
     let contents = fs::read_to_string(config.filename)?;
 
     let results = if config.case_sensitive {
