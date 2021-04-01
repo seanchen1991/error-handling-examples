@@ -1,10 +1,10 @@
-use std::error::Error;
-use std::fmt;
 use std::io;
+use std::fmt;
+use std::error::Error;
 
 #[derive(Debug)]
 pub enum AppError {
-    MissingPattern,
+    MissingQuery,
     MissingFilename,
     ConfigLoad { source: io::Error },
 }
@@ -12,8 +12,8 @@ pub enum AppError {
 impl fmt::Display for AppError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::MissingPattern => f.write_str("No pattern provided"),
-            Self::MissingFilename => f.write_str("No filename provided"),
+            Self::MissingQuery=> f.write_str("Didn't get a query string"),
+            Self::MissingFilename => f.write_str("Didn't get a file name"),
             Self::ConfigLoad { source } => write!(f, "Could not load config: {}", source),
         }
     }
